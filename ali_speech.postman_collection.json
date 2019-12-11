@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "5c5f4d72-d8b6-48f1-8572-13f5207e01cb",
+		"name": "ali_speech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76b66268-62ed-44a3-a05e-24564cb110b8",
+						"exec": [
+							"// 请求正常返回",
+							"pm.test(\"状态200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// 返回结果验证",
+							"pm.test(\"返回scope\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.ErrMsg).to.eql(\"\");",
+							"",
+							"    // 将access_token保存为环境变量",
+							"    pm.environment.set(\"token\", jsonData.Token.Id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "AccessKeyId",
+							"value": "LTA******F3s",
+							"type": "text"
+						},
+						{
+							"key": "RegionId",
+							"value": "cn-shanghai",
+							"type": "text"
+						},
+						{
+							"key": "Timestamp",
+							"value": "2019-12-11T16:57:52Z",
+							"type": "text"
+						},
+						{
+							"key": "Signature",
+							"value": "oT8A8RgvFE1tMD%2B3hDbGuoMQSi8%3D",
+							"type": "text"
+						},
+						{
+							"key": "SignatureNonce",
+							"value": "8d1e6a7a-f44e-40d5-aedb-fe4a1c80f434",
+							"type": "text"
+						},
+						{
+							"key": "SignatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "text"
+						},
+						{
+							"key": "SignatureVersion",
+							"value": "1.0",
+							"type": "text"
+						},
+						{
+							"key": "Version",
+							"value": "2019-02-28",
+							"type": "text"
+						},
+						{
+							"key": "Action",
+							"value": "CreateToken",
+							"type": "text"
+						},
+						{
+							"key": "Format",
+							"value": "JSON",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://nls-meta.cn-shanghai.aliyuncs.com/"
+			},
+			"response": []
+		},
+		{
+			"name": "tts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76b66268-62ed-44a3-a05e-24564cb110b8",
+						"exec": [
+							"// 请求正常返回",
+							"pm.test(\"状态200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"// 返回结果验证",
+							"pm.test(\"返回err_no\", function () {",
+							"    // 返回音频时，内容类型为audio",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"    if (responseHeaders[\"Content-Type\"] !== \"audio/mpeg\") {",
+							"        ",
+							"        // 如果没有音频，判断错误代码",
+							"        var jsonData = pm.response.json();",
+							"        pm.expect(jsonData.status).to.eql(0);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"token\": \"{{token}}\",\r\n\t\"appkey\": \"{{app_key}}\",\r\n\t\"format\": \"wav\",\r\n\t\"text\": \"Postman测试接口，天气挺好的。\"\r\n}"
+				},
+				"url": "https://nls-gateway.cn-shanghai.aliyuncs.com/stream/v1/tts"
+			},
+			"response": []
+		},
+		{
+			"name": "asr",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76b66268-62ed-44a3-a05e-24564cb110b8",
+						"exec": [
+							"// 请求正常返回",
+							"pm.test(\"状态200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// 返回结果验证",
+							"pm.test(\"返回status\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(20000000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/octet-stream"
+					},
+					{
+						"key": "X-NLS-Token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/D:/work/postman/speech/16k.pcm"
+					}
+				},
+				"url": {
+					"raw": "https://nls-gateway.cn-shanghai.aliyuncs.com/stream/v1/asr?appkey={{app_key}}&format=pcm&sample_rate=16000",
+					"protocol": "https",
+					"host": [
+						"nls-gateway",
+						"cn-shanghai",
+						"aliyuncs",
+						"com"
+					],
+					"path": [
+						"stream",
+						"v1",
+						"asr"
+					],
+					"query": [
+						{
+							"key": "appkey",
+							"value": "{{app_key}}"
+						},
+						{
+							"key": "format",
+							"value": "pcm"
+						},
+						{
+							"key": "sample_rate",
+							"value": "16000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

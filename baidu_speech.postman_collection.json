@@ -114,7 +114,7 @@
 					"urlencoded": [
 						{
 							"key": "tex",
-							"value": "Postman测试接口",
+							"value": "Postman测试接口，天气挺好的。",
 							"description": "合成的文本，使用UTF-8编码。小于2048个中文字或者英文数字。（文本在百度服务器内转换为GBK后，长度必须小于4096字节）",
 							"type": "text"
 						},
