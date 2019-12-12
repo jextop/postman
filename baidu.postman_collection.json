@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "db8f4edf-56f9-454f-a87a-f7a912f85030",
-		"name": "baidu_speech",
+		"_postman_id": "4d1f6623-1006-4524-922f-5acc644973be",
+		"name": "baidu",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -97,6 +97,18 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "53188a10-a95e-4665-8813-d71c9acd678f",
+						"exec": [
+							"var date = new Date();",
+							"var dateStr = \"\" + date.getFullYear() + \"年\" + (date.getMonth() + 1) + \"月\" + date.getDate() + \"日\";",
+							"postman.setGlobalVariable(\"date\", dateStr);"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -114,7 +126,7 @@
 					"urlencoded": [
 						{
 							"key": "tex",
-							"value": "Postman测试接口，天气挺好的。",
+							"value": "Postman测试百度云语音合成接口，今天是{{date}}，天气挺好的。",
 							"description": "合成的文本，使用UTF-8编码。小于2048个中文字或者英文数字。（文本在百度服务器内转换为GBK后，长度必须小于4096字节）",
 							"type": "text"
 						},

@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "93b7a7fa-c93a-4ba5-8d17-dc626957d229",
-		"name": "huawei_speech",
+		"_postman_id": "a554d148-fe28-4e6b-b40c-d7f96b9efc60",
+		"name": "huawei",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -124,13 +124,10 @@
 							"// 返回结果验证",
 							"var schema = {",
 							"    \"type\": \"object\",",
-							"    \"required\": [\"text\", \"score\"], ",
+							"    \"required\": [\"data\"], ",
 							"    \"properties\": {",
-							"        \"text\": {",
+							"        \"data\": {",
 							"            \"type\": \"string\"",
-							"        },",
-							"        \"score\": {",
-							"            \"type\": \"number\"",
 							"        }",
 							"    }",
 							"};",
@@ -139,6 +136,18 @@
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(tv4.validate(jsonData.result, schema)).to.be.true;",
 							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6a446bb9-a629-4c7d-87d1-f3ccb4113575",
+						"exec": [
+							"var date = new Date();",
+							"var dateStr = \"\" + date.getFullYear() + \"年\" + (date.getMonth() + 1) + \"月\" + date.getDate() + \"日\";",
+							"postman.setGlobalVariable(\"date\", dateStr);"
 						],
 						"type": "text/javascript"
 					}
@@ -161,7 +170,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n  \"text\": \"Postman测试接口，天气挺好的。\",\r\n   \"config\": \r\n   { \r\n     \"audio_format\": \"wav\", \r\n     \"sample_rate\": \"8000\", \r\n     \"property\": \"chinese_xiaoyan_common\",\r\n     \"speed\": 10,\r\n     \"pitch\": 10,\r\n     \"volume\": 60\r\n   }\r\n }"
+					"raw": "{\r\n\t\"text\": \"Postman测试华为云语音合成接口，今天是{{date}}，天气挺好的。\",\r\n\t\"config\": {\r\n\t\t\"audio_format\": \"wav\",\r\n\t\t\"sample_rate\": \"16000\",\r\n\t\t\"property\": \"chinese_xiaoyan_common\",\r\n\t\t\"speed\": 0,\r\n\t\t\"pitch\": 10,\r\n\t\t\"volume\": 60\r\n\t}\r\n}"
 				},
 				"url": "https://sis-ext.{{endpoint_cn4}}.myhuaweicloud.com/v1/{{cn4_project_id}}/tts"
 			},

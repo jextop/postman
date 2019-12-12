@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "5c5f4d72-d8b6-48f1-8572-13f5207e01cb",
-		"name": "ali_speech",
+		"_postman_id": "77bd5ab2-1c51-4ef4-8875-3003b8b20b11",
+		"name": "ali",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -129,6 +129,18 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "95976650-1645-4f2e-8856-7b0f5d17813b",
+						"exec": [
+							"var date = new Date();",
+							"var dateStr = \"\" + date.getFullYear() + \"年\" + (date.getMonth() + 1) + \"月\" + date.getDate() + \"日\";",
+							"postman.setGlobalVariable(\"date\", dateStr);"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -142,7 +154,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"token\": \"{{token}}\",\r\n\t\"appkey\": \"{{app_key}}\",\r\n\t\"format\": \"wav\",\r\n\t\"text\": \"Postman测试接口，天气挺好的。\"\r\n}"
+					"raw": "{\r\n\t\"text\": \"Postman测试阿里云语音合成接口，今天是{{date}}，天气挺好的。\",\r\n\t\"appkey\": \"{{app_key}}\",\r\n\t\"token\": \"{{token}}\",\r\n\t\"format\": \"wav\",\r\n\t\"sample_rate\": 16000,\r\n\t\"voice\": \"xiaoyun\",\r\n\t\"volume\": 50,\r\n\t\"speech_rate\": 0,\r\n\t\"pitch_rate\": 0\r\n}"
 				},
 				"url": "https://nls-gateway.cn-shanghai.aliyuncs.com/stream/v1/tts"
 			},
