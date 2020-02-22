@@ -1,0 +1,30 @@
+{
+	"variables": [],
+	"info": {
+		"name": "tuling",
+		"_postman_id": "34d475f4-d601-7de5-7197-44786d233c28",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://openapi.tuling123.com/openapi/api/v2",
+			"request": {
+				"url": "http://openapi.tuling123.com/openapi/api/v2",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"reqType\":0,\r\n    \"perception\": {\r\n        \"inputText\": {\r\n            \"text\": \"附近的酒店\"\r\n        }\r\n    },\r\n    \"userInfo\": {\r\n        \"apiKey\": \"{{api_key}}\",\r\n        \"userId\": \"{{user_id}}\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
