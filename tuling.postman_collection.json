@@ -20,7 +20,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"reqType\":0,\r\n    \"perception\": {\r\n        \"inputText\": {\r\n            \"text\": \"附近的酒店\"\r\n        }\r\n    },\r\n    \"userInfo\": {\r\n        \"apiKey\": \"{{api_key}}\",\r\n        \"userId\": \"{{user_id}}\"\r\n    }\r\n}"
+					"raw": "{\r\n\t\"reqType\":0,\r\n    \"perception\": {\r\n        \"inputText\": {\r\n            \"text\": \"天气\"\r\n        },\r\n        \"inputImage\": {\r\n            \"url\": \"http://q671m4cqj.bkt.clouddn.com/ff4b45978652eac92b3b749f4722e77c7.jpg\"\r\n        },\r\n        \"inputMedia\": {\r\n            \"url\": \"http://q671m4cqj.bkt.clouddn.com/a1ccac944c66103bc123d8b02870b8a56.wav\"\r\n        },\r\n        \"selfInfo\": {\r\n            \"location\": {\r\n                \"city\": \"上海\",\r\n                \"province\": \"上海\",\r\n                \"street\": \"张江高科\"\r\n            }\r\n        }\r\n    },\r\n    \"userInfo\": {\r\n        \"apiKey\": \"{{api_key}}\",\r\n        \"userId\": \"postman\"\r\n    }\r\n}"
 				},
 				"description": ""
 			},
